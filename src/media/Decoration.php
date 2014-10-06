@@ -9,9 +9,9 @@ namespace Phal {
     class Decoration extends LeafTag {
         
         function __construct($path) {
-            parent::__construct("image");
-            parent::addAttribute("src", $path);
-            parent::addAttribute("alt", "");
+            parent::__construct("img");
+            parent::addAttribute("src", new Text($path));
+            parent::addAttribute("alt", Text::emptyInstance());
         }
         
     }

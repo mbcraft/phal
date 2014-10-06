@@ -9,9 +9,9 @@ namespace Phal {
     class FunctionalImage extends LeafTag {
 
         function __construct($path, $purpose) {
-            parent::__construct("image");
-            parent::addAttribute("src", $path);
-            parent::addAttribute("alt", $purpose);
+            parent::__construct("img");
+            parent::addAttribute("src", new Text($path));
+            parent::addAttribute("alt", new Text($purpose));
         }
 
     }
