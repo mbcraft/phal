@@ -5,7 +5,7 @@ namespace Phal {
     /**
      * This class rapresents a tag that can have childs inside phal.
      */
-    abstract class ParentTag extends LeafTag {
+    abstract class ParentTag extends AbstractTag {
 
         private $childs = array();
 
@@ -15,10 +15,10 @@ namespace Phal {
          * @param type $tag A IWritable object to add.
          */
         public final function addChild($writable) {
-            if ($writable instanceof Writable) {
+            if ($writable instanceof IWritable) {
                 array_push($this->childs, $writable);
             } else {
-                throw new PhalException("The child added is not Writable.");
+                throw new PhalException("The child added is not IWritable.");
             }
         }
 

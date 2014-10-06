@@ -8,6 +8,7 @@ namespace Phal {
      */
     class Text implements IWritable {
 
+        private static $empty = null;
         private $text;
 
         function __construct($plain_text) {
@@ -28,6 +29,12 @@ namespace Phal {
             } else {
                 throw new PhalException("A valid Text instance with less than 100 chars should be used.");
             }
+        }
+        
+        public static function emptyInstance() {
+            if (self::$empty==null) 
+                self::$empty = new Text("");
+            return self::$empty;
         }
 
     }
