@@ -1,0 +1,24 @@
+{
+    "name": "mbcraft/phal",
+    "description": "Phal is a library for creating accessible HTML pages.",
+    "license": "Simplified BSD",
+    "keywords" : ["accessibility","html","generation","toolkit"],
+    "authors": [
+        {
+            "name": "Marco Bagnaresi",
+            "email": "info@mbcraft.it",
+	    "homepage": "http://www.mbcraft.it"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require-dev": {
+	"phpunit/phpunit": "4.3.*"
+	},
+    "autoload": {
+        "psr-4": {
+            "Phal\\": ["src/","src/media/","src/forms/"]
+        }
+    }
+    
+
+}
