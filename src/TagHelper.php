@@ -48,7 +48,7 @@ namespace Phal {
          * @param type $name The name of the tag.
          * @return type A string
          */
-        public static function openAndClose($name,$attributes=array()) {
+        public static function openAndClose($name, $attributes = array()) {
             self::ensureValidTagAttributeOrPropertyName($name);
             $result = "<" . $name;
             foreach ($attributes as $k => $value) {
@@ -61,15 +61,23 @@ namespace Phal {
             $result.= "/>";
             return $result;
         }
-        
-        public static function tagWithText($name,$text) {
-            Text::ensureValidText($text);
-            return "<".$name.">".$text."</".$name.">";
+
+        private static function ensureValidText($obj) {
+            if ($obj instanceof Text) {
+                return;
+            } else {
+                throw new PhalException("A Text instance is required for attribute values.");
+            }
         }
-        
+
+        public static function tagWithText($name, $text) {
+            self::ensureValidText($text);
+            return "<" . $name . ">" . $text . "</" . $name . ">";
+        }
+
         private static function ensureValidTagAttributeOrPropertyName($val) {
-            if (strpos($val, " ")!==false) {
-                    throw new PhalException($val." is not a valid tag, attribute or property name!");
+            if (strpos($val, " ") !== false) {
+                throw new PhalException($val . " is not a valid tag, attribute or property name!");
             }
         }
 
@@ -83,7 +91,7 @@ namespace Phal {
             return "<!DOCTYPE " . $type . ">";
         }
 
-        /** 
+        /**
          * Generates a comment tag.
          * 
          * @param type $text The text of the comment

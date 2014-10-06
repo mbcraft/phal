@@ -6,7 +6,7 @@ namespace Phal {
      * This class rapresents simple plaintext. Controls should be added in order
      * to avoid tags inside text.
      */
-    class Text {
+    class Text implements IWritable {
 
         private $text;
 
@@ -15,23 +15,15 @@ namespace Phal {
         }
 
         function isValidAltText() {
-            return strlen($this->text < 100);
+            return strlen($this->text) < 100;
         }
 
         function __toString() {
             return $this->text;
         }
 
-        public static function ensureValidText($obj) {
-            if ($obj instanceof self) {
-                return;
-            } else {
-                throw new PhalException("A valid Text instance should be used.");
-            }
-        }
-
-        public static function ensureValidAltText($obj) {
-            if ($obj instanceof self && $obj->isValidAltText()) {
+        public function ensureValidAltText() {
+            if ($this->isValidAltText()) {
                 return;
             } else {
                 throw new PhalException("A valid Text instance with less than 100 chars should be used.");

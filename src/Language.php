@@ -7,7 +7,7 @@ namespace Phal {
      * inside Phal.
      */
     
-    class Language {
+    class Language implements IWritable {
     
         private static $available_languages = array("it","en","de","es","fr");
         
@@ -18,11 +18,12 @@ namespace Phal {
          * @return type
          * @throws PhalException
          */
-        public static function get($lang) {
-            if (array_search(strtolower($lang), self::$available_languages)!==false)
-                    return strtolower($lang);
-            else 
+        public final static function get($lang) {
+            if (array_search(strtolower($lang), self::$available_languages)!==false) {
+                    return new Language(strtolower($lang));
+            } else { 
                 throw new PhalException("Language ".$lang." not found.");
+            }
         }
         
         private $lang;
@@ -31,7 +32,7 @@ namespace Phal {
             $this->lang = $lang;
         }
         
-        public function getLang() {
+        public final function __toString() {
             return $this->lang;
         }
 

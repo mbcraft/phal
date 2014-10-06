@@ -5,36 +5,45 @@ namespace Phal {
     /**
      * This class rapresents a tag that can have childs inside phal.
      */
-    class ParentTag extends LeafTag {
+    abstract class ParentTag extends LeafTag {
 
         private $childs = array();
 
         /**
-         * Adds a child to this container.
+         * Adds a writable child to this container.
          * 
-         * @param type $tag A LeafTag or ParentTag to add.
+         * @param type $tag A IWritable object to add.
          */
-        public function addChild($tag) {
-            if ($tag instanceof LeafTag) {
-                array_push($this->childs, $tag);
+        public final function addChild($writable) {
+            if ($writable instanceof Writable) {
+                array_push($this->childs, $writable);
             } else {
-                throw new PhalException("The tag added do not inherits from LeafTag.");
+                throw new PhalException("The child added is not Writable.");
             }
         }
 
         /**
          * Gets all the childs of this parent tag.
          * 
-         * @return type
+         * @return type An array of all childs.
          */
-        public function getChilds() {
+        public final function getChilds() {
             return $this->childs;
         }
-
+        
+        /**
+         * Returns the presence of childs inside this tag.
+         * 
+         * @return type true if this tag has childs, false otherwise
+         */
+        public final function hasChilds() {
+            return !empty($this->childs);
+        }
+        
         /**
          * Renders all the childs of this parent tag.
          * 
-         * @return type
+         * @return type The concatenated rendered childs.
          */
         private function renderChilds() {
             $result = "";
@@ -44,10 +53,15 @@ namespace Phal {
             return $result;
         }
         
-        function __toString() {
-            $result = TagHelper::open($this->name, $this->attributes);
-            $result.= $this->renderChilds();
-            $result.= TagHelper::close($this->name);
+        public final function __toString() {
+            $result = "";
+            if ($this->hasChilds()) {
+                $result.= TagHelper::open($this->name, $this->attributes);
+                $result.= $this->renderChilds();
+                $result.= TagHelper::close($this->name);
+            } else {
+                $result.= TagHelper::openAndClose($this->name, $this->attributes);
+            }
             return $result;
         }
 

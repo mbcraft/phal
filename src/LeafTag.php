@@ -2,7 +2,7 @@
 
 namespace Phal {
 
-    class LeafTag {
+    abstract class LeafTag implements IWritable {
 
         protected $name;
         protected $attributes = array();
@@ -11,7 +11,7 @@ namespace Phal {
             $this->name = $name;
         }
 
-        protected function addAttribute($name, $value) {
+        protected final function addAttribute($name, $value) {
             if (!isset($this->attributes[$name])) {
                 $this->attributes[$name] = $value;
             } else {
@@ -19,15 +19,15 @@ namespace Phal {
             }
         }
 
-        protected function addProperty($prop) {
+        protected final function addProperty($prop) {
             if (!isset($this->attributes[$prop])) {
                 $this->attributes[$prop] = null;
             } else {
-                throw new PhalException("Attribute or property " . $name . " is already set!");
+                throw new PhalException("Attribute or property " . $prop . " is already set!");
             }
         }
 
-        function __toString() {
+        public final function __toString() {
             return TagHelper::openAndClose($this->name, $this->attributes);
         }
 
