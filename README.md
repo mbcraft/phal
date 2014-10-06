@@ -16,7 +16,7 @@ Complex web application are a step further. I'll integrate if i'll be able to.
 Anyone can contribute, but please keep the unit tests up and running.
 
 If some changes to license is needed by collaborators 
-(eg. removing 'Copyright from MBCRAFT for example) i think it's understandable.
+(eg. removing 'Copyright from MBCRAFT' for example) i think it's understandable and i'll agree.
 
 Thanks.
 
