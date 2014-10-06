@@ -11,7 +11,7 @@ namespace Phal {
             $this->name = $name;
         }
 
-        protected final function addAttribute($name, $value) {
+        public final function addAttribute($name, $value) {
             self::ensureValidAttributeOrPropertyName($name);
             self::ensureValidAttributeValue($value);
             if (!isset($this->attributes[$name])) {
@@ -33,7 +33,7 @@ namespace Phal {
             }
         }
 
-        protected final function addProperty($prop) {
+        public final function addProperty($prop) {
             self::ensureValidAttributeOrPropertyName($prop);
             if (!isset($this->attributes[$prop])) {
                 $this->attributes[$prop] = null;
