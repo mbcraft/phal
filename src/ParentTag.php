@@ -14,7 +14,7 @@ namespace Phal {
          * 
          * @param type $tag A IWritable object to add.
          */
-        protected function addChild($writable) {
+        public function addChild($writable) {
             if ($writable instanceof IWritable) {
                 array_push($this->childs, $writable);
             } else {
@@ -27,7 +27,7 @@ namespace Phal {
          * 
          * @return type An array of all childs.
          */
-        protected final function getChilds() {
+        public final function getChilds() {
             return $this->childs;
         }
         
@@ -36,7 +36,7 @@ namespace Phal {
          * 
          * @return type true if this tag has childs, false otherwise
          */
-        protected final function hasChilds() {
+        public final function hasChilds() {
             return !empty($this->childs);
         }
         
@@ -45,7 +45,7 @@ namespace Phal {
          * 
          * @return type The concatenated rendered childs.
          */
-        private function renderChilds() {
+        protected final function renderChilds() {
             $result = "";
             foreach ($this->childs as $ch) {
                 $result.= $ch;
@@ -53,7 +53,7 @@ namespace Phal {
             return $result;
         }
         
-        public final function __toString() {
+        protected final function renderTag() {
             $result = "";
             if ($this->hasChilds()) {
                 $result.= TagHelper::open($this->name, $this->attributes);
@@ -63,6 +63,10 @@ namespace Phal {
                 $result.= TagHelper::openAndClose($this->name, $this->attributes);
             }
             return $result;
+        }
+        
+        public function __toString() {
+            return $this->renderTag();
         }
 
     }

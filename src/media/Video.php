@@ -7,14 +7,8 @@ namespace Phal {
      */
     class Video extends AbstractTrackable {
 
-        private $description;
-
-        public function __construct($description) {
-            $this->description = $description;
-        }
-        
-        public function __toString() {
-            return TagHelper::openAndClose("video",$p);
+        public function __construct() {
+            parent::__construct("video");
         }
 
     }

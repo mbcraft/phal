@@ -5,19 +5,10 @@ namespace Phal {
     /**
      * This class handles the addition of Audio to the pages.
      */
-    class Audio extends LeafTag {
+    class Audio extends AbstractTrackable {
 
-        private $description;
-
-        public function __construct($description) {
-            $this->description = $description;
-        }
-        
-        public function __toString() {
-            $result = "";
-            $result.= TagHelper::open("audio");
-            $result.= TagHelper::close("audio");
-            return $result;
+        public function __construct() {
+            parent::__construct("audio");
         }
 
     }
