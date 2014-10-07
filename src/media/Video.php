@@ -5,7 +5,7 @@ namespace Phal {
     /**
      * This class handles the addition of Video to the pages.
      */
-    class Video extends LeafTag {
+    class Video extends AbstractTrackable {
 
         private $description;
 

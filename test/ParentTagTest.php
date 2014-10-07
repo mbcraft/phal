@@ -9,6 +9,8 @@ class LeafTagA extends LeafTag {
         parent::__construct("l_tag");
         parent::addProperty("my_prop");
     }
+    
+
 }
 
 class ParentTagA extends ParentTag {
@@ -16,6 +18,10 @@ class ParentTagA extends ParentTag {
         parent::__construct("p_tag");
         parent::addProperty("prop");
         parent::addAttribute("attr", new Text("val"));
+    }
+    
+    function addChild($child) {
+        parent::addChild($child);
     }
 }
 

@@ -12,7 +12,7 @@ namespace Phal {
         private $text;
 
         function __construct($plain_text) {
-            $this->text = $plain_text;
+            $this->text = "".$plain_text;
         }
 
         function isValidAltText() {
@@ -35,6 +35,11 @@ namespace Phal {
             if (self::$empty==null) 
                 self::$empty = new Text("");
             return self::$empty;
+        }
+        
+        public static function check($what,$obj) {
+            if (!($obj instanceof Text))
+                throw new PhalException($what." must be of class Text!");
         }
 
     }

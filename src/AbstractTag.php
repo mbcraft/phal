@@ -13,17 +13,11 @@ namespace Phal {
 
         public final function addAttribute($name, $value) {
             self::ensureValidAttributeOrPropertyName($name);
-            self::ensureValidAttributeValue($value);
+            Text::check("Attribute ".$name,$value);
             if (!isset($this->attributes[$name])) {
-                $this->attributes[$name] = $value;
+                $this->attributes[$name] = "".$value;
             } else {
                 throw new PhalException("Attribute or property " . $name . " is already set!");
-            }
-        }
-
-        private static final function ensureValidAttributeValue($value) {
-            if (!($value instanceof Text)) {
-                throw new PhalException("Attribute value must be of class Text.");
             }
         }
 

@@ -6,7 +6,7 @@ namespace Phal {
      * This class handles the additions of Figures to the page.
      * This class is rendered with a figure tag.
      */
-    class Figure extends LeafTag {
+    class Figure implements IWritable {
         
         private $caption = null;
         private $image = null;

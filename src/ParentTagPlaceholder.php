@@ -1,20 +1,23 @@
 <?php
 
 namespace Phal {
-
+    
     /**
-     * This class rapresents a tag that can have childs inside phal.
+     * This class rapresents a parent placeholder tag. It does not render
+     * any tag itself, but can contain other tags or texts. It is used to
+     * keep an order inside the html and to reserve place for tags to be 
+     * inserted in special conditions.
      */
-    abstract class ParentTag extends AbstractTag {
-
-        private $childs = array();
-
+    class ParentTagPlaceholder implements IWritable {
+        
+        private $childs = array();       
+        
         /**
          * Adds a writable child to this container.
          * 
          * @param type $tag A IWritable object to add.
          */
-        protected function addChild($writable) {
+        public final function addChild($writable) {
             if ($writable instanceof IWritable) {
                 array_push($this->childs, $writable);
             } else {
@@ -27,7 +30,7 @@ namespace Phal {
          * 
          * @return type An array of all childs.
          */
-        protected final function getChilds() {
+        public final function getChilds() {
             return $this->childs;
         }
         
@@ -36,16 +39,16 @@ namespace Phal {
          * 
          * @return type true if this tag has childs, false otherwise
          */
-        protected final function hasChilds() {
+        public final function hasChilds() {
             return !empty($this->childs);
         }
         
         /**
-         * Renders all the childs of this parent tag.
+         * Renders all the childs of this parent placeholder tag.
          * 
          * @return type The concatenated rendered childs.
          */
-        private function renderChilds() {
+        public final function __toString() {
             $result = "";
             foreach ($this->childs as $ch) {
                 $result.= $ch;
@@ -53,18 +56,6 @@ namespace Phal {
             return $result;
         }
         
-        public final function __toString() {
-            $result = "";
-            if ($this->hasChilds()) {
-                $result.= TagHelper::open($this->name, $this->attributes);
-                $result.= $this->renderChilds();
-                $result.= TagHelper::close($this->name);
-            } else {
-                $result.= TagHelper::openAndClose($this->name, $this->attributes);
-            }
-            return $result;
-        }
-
     }
-
+    
 }

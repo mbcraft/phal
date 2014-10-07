@@ -55,7 +55,7 @@ namespace Phal {
                 self::ensureValidTagAttributeOrPropertyName($k);
                 $result.= " " . $k;
                 if ($value !== null) {
-                    $result.= "=\"" . $value . "\"";
+                    $result.= '="'.$value.'"';
                 }
             }
             $result.= "/>";

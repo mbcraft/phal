@@ -35,6 +35,11 @@ namespace Phal {
         public final function __toString() {
             return $this->lang;
         }
+        
+        public static function check($what,$obj) {
+            if (!($obj instanceof Language))
+                throw new PhalException($what." must be of class Language!");
+        }
 
     }
 }
