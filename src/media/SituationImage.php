@@ -11,7 +11,7 @@ namespace Phal {
         
         function __construct($description, $path) {
             if ($description instanceof Text && $description->isValidAltText()) {
-                parent::__construct("image");
+                parent::__construct("img");
                 parent::addAttribute("src", $path);
                 parent::addAttribute("alt", $description);
             }
