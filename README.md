@@ -26,5 +26,8 @@ If some changes to license is needed by collaborators
 
 Thanks.
 
+----
+
+Actually this project is just a draft.
 
 -Marco Bagnaresi
